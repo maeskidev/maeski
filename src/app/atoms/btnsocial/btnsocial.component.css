@@ -1,0 +1,18 @@
+.btn-social{
+        border: 1px solid black;
+        margin: 10px 5px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: 600;
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 10px;
+        width: min-content;
+        align-items: center;
+        &:hover{
+            color: rgb(140, 69, 255);
+            background-color:rgba(124, 43, 255, 0.103) ;
+            transition: background .3s;
+            cursor: pointer;
+        }
+}

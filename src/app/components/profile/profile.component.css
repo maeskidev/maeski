@@ -1,0 +1,13 @@
+main {
+    /* height: 100vh; */
+    /* width: 100vw; */
+    /* background-image: linear-gradient(to bottom, white 10%, transparent );
+    background-image: 
+        linear-gradient(to right, white 30%, transparent),
+        url("../../../../public/bg1.png"); */
+    background-size: cover;
+    background-position: 300px;
+    background-repeat: no-repeat;
+    padding: 30px;
+    overflow: hidden;
+}
