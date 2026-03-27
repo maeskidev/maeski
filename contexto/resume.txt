@@ -1,0 +1,17 @@
+Nombre: Michael E. Quiros
+Marca: maeski
+Cargo: Softwar Enginner
+NttData senior software enginner 2022 → ....
+Banrep Intern 2020 → 2021
+
+UJTL 2016 → 2021
+
+
+links
+https://github.com/maeskidev
+https://www.linkedin.com/in/michaelquiros/
+
+proyectos personales
+https://hojitadevida.com/
+https://maeskidev.github.io/igaret/
+https://maeskidev.github.io/react-ToDo/
