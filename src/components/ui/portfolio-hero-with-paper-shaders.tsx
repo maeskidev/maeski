@@ -1,6 +1,7 @@
 "use client"
 
 import { Dithering } from "@paper-design/shaders-react"
+import Link from "next/link"
 import { useState } from "react"
 
 import { MatrixText } from "@/components/ui/matrix-text"
@@ -11,7 +12,7 @@ export default function ResumePage() {
   return (
     <div className="relative min-h-screen overflow-hidden flex">
       <div
-        className={`w-1/2 p-8 font-mono relative z-10 ${isDarkMode ? "bg-black text-white" : "bg-white text-black"}`}
+        className={`w-1/2 p-8 font-mono relative z-10 max-md:w-full ${isDarkMode ? "bg-black text-white max-md:bg-[#000000aa]" : "bg-white max-md:bg-[#ffffff7f] text-black"}`}
       >
         {/* Theme toggle button in top right of left panel */}
         <button
@@ -37,7 +38,31 @@ export default function ResumePage() {
 
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-lg font-normal mb-8">maeski</h1>
+          <div className="mb-8 flex flex-wrap items-center gap-3">
+            <h1 className="text-lg font-normal">maeski</h1>
+            <nav className="flex flex-wrap items-center gap-2 text-xs" aria-label="Primary">
+              <Link
+                href="/blog"
+                className={`inline-flex items-center rounded-full border px-3 py-1.5 transition-colors ${
+                  isDarkMode
+                    ? "border-white/20 bg-white/5 hover:bg-white/10"
+                    : "border-black/20 bg-black/5 hover:bg-black/10"
+                }`}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/playground"
+                className={`inline-flex items-center rounded-full border px-3 py-1.5 transition-colors ${
+                  isDarkMode
+                    ? "border-white/20 bg-white/5 hover:bg-white/10"
+                    : "border-black/20 bg-black/5 hover:bg-black/10"
+                }`}
+              >
+                Playground
+              </Link>
+            </nav>
+          </div>
           <div className="mb-8">
             <h2 className="text-lg font-normal">
               <MatrixText
@@ -110,7 +135,7 @@ export default function ResumePage() {
         </div>
       </div>
 
-      <div className="w-1/2 relative">
+      <div className="w-1/2 relative max-md:absolute max-md:w-full max-md:h-full">
         <Dithering
           style={{ height: "100%", width: "100%" }}
           colorBack={isDarkMode ? "hsl(0, 0%, 0%)" : "hsl(0, 0%, 95%)"}
