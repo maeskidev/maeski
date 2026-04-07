@@ -7,8 +7,13 @@ import { useState } from "react"
 import { MatrixText } from "@/components/ui/matrix-text"
 import SocialMedia from "./socialMedia"
 import HaruAscii from "./ascii/haruAscci"
+import type { BlogPostMeta } from "@/lib/blog"
 
-export default function ResumePage() {
+interface ResumePageProps {
+  latestPost?: BlogPostMeta | null
+}
+
+export default function ResumePage({ latestPost }: ResumePageProps) {
   const [isDarkMode, setIsDarkMode] = useState(true)
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -84,6 +89,18 @@ export default function ResumePage() {
 
         <div>
           <HaruAscii isDarkMode={isDarkMode} />
+          {latestPost && (
+            <Link
+              href={`/blog/${latestPost.slug}`}
+              className={`mt-4 inline-flex items-center gap-2 text-xs opacity-50 hover:opacity-100 transition-opacity ${
+                isDarkMode ? "text-white" : "text-black"
+              }`}
+            >
+              <span className="uppercase tracking-widest text-[10px]">latest</span>
+              <span>→</span>
+              <span>{latestPost.title}</span>
+            </Link>
+          )}
         </div>
         
 
