@@ -24,7 +24,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <main className="min-h-[calc(100vh-56px)] bg-neutral-950 text-neutral-100">
       <div className="mx-auto w-full max-w-3xl px-6 py-16">
         <Link href="/blog" className="mb-8 inline-block text-sm text-neutral-400 hover:text-neutral-200">
-          Back to blog
+          Back to readme.md
         </Link>
 
         <div className="mb-4 text-xs text-neutral-400">{post.publishedAt}</div>

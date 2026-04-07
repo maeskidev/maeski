@@ -15,3 +15,25 @@ proyectos personales
 https://hojitadevida.com/
 https://maeskidev.github.io/igaret/
 https://maeskidev.github.io/react-ToDo/
+
+
+NTT DATA (5 años): Desarrollo de proyectos de gran escala.
+
+Terpel (2025–2026): Portal de servicios de lubricantes y combustibles con React y Azure DevOps.
+
+Porvenir App (2025): Líder técnico en frontend con Ionic, React y Capacitor.
+
+Bancolombia (2025): Proyecto “Cero Papel” con Adobe AEM Cloud.
+
+Movistar.com (2024): Pasarela de suministros de internet y e-commerce con Magento2.
+
+Telefónica (2023): Infraestructura frontend con Angular 14+, seguridad con JWT y cobertura con SonarQube.
+
+SIECA - PDCC (2021–2023): Proyecto internacional con Angular, Liferay y microservicios en Java.
+
+Banco de la República (2020): Desarrollo web interno con PWA en Ionic y automatización de reportes con Python.
+
+🎓 Educación
+Universidad Jorge Tadeo Lozano (2016–2020): Ingeniería de Sistemas.
+
+Reconocimiento por startup “Fly Me”, aplicación para conectar pasajeros de un mismo vuelo.

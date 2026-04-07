@@ -10,11 +10,11 @@ export default function ContentLayout({
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/75 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
         <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="font-mono text-sm font-medium tracking-wide">
-            maeski.com
+            MichaelQuiros.com
           </Link>
           <div className="flex items-center gap-2 text-sm">
             <Link href="/blog" className="rounded-full px-3 py-1.5 transition-colors hover:bg-black/5">
-              Blog
+              README.MD
             </Link>
             <Link href="/playground" className="rounded-full px-3 py-1.5 transition-colors hover:bg-black/5">
               Playground

@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  turbopack: {
+    rules: {
+      "*.txt": {
+        loaders: ["raw-loader"],
+        as: "*.js",
+      },
+    },
+  },
 };
 
 export default nextConfig;

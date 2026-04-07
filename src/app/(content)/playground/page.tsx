@@ -17,7 +17,7 @@ export default function PlaygroundPage() {
             href="/"
             className="rounded-full border border-neutral-300 px-4 py-2 text-sm transition-colors hover:bg-neutral-100"
           >
-            Back to landing
+            Back to home
           </Link>
         </div>
 

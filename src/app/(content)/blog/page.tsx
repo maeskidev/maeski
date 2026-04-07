@@ -9,7 +9,7 @@ export default async function BlogPage() {
     <main className="min-h-[calc(100vh-56px)] bg-neutral-950 text-neutral-100">
       <div className="mx-auto w-full max-w-5xl px-6 py-16">
         <div className="mb-10 flex items-center justify-between gap-4">
-          <h1 className="text-3xl font-semibold tracking-tight">Blog</h1>
+          <h1 className="text-3xl font-semibold tracking-tight font-mono">00.README.MD</h1>
           <Link
             href="/"
             className="rounded-full border border-neutral-700 px-4 py-2 text-sm transition-colors hover:bg-neutral-800"

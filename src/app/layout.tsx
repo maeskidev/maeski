@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "maeski.com",
+  title: "MichaelQeuiros.com",
   description: "Landing, blog, and playground by Michael E. Quiros.",
 };
 
