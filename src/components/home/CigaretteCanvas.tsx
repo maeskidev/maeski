@@ -27,6 +27,8 @@ export default function CigaretteCanvas() {
   const [hintVisible, setHintVisible] = useState(true);
   const [smokeBurstVisible, setSmokeBurstVisible] = useState(false);
   const [blinkVisible, setBlinkVisible] = useState(false);
+  const [holdingUi, setHoldingUi] = useState(false);
+  const holdMeterRef = useRef<HTMLDivElement>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const smokeBurstTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const blinkTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -62,7 +64,9 @@ export default function CigaretteCanvas() {
 
     // ── State ──────────────────────────────────────────────────────
     let holding = false;
+    let wasHolding = false;
     let atLips  = false;
+    let dragReady = false;
     let shakeT  = 0;
 
 
@@ -231,20 +235,29 @@ export default function CigaretteCanvas() {
       const spd     = holding ? APPROACH_SPD : RETREAT_SPD;
       cigGroup.position.z += (targetZ - cigGroup.position.z) * Math.min(1, spd * dt * 2.4);
 
+      const holdProgress = THREE.MathUtils.clamp(
+        (cigGroup.position.z - CIG_IDLE_Z) / (CIG_LIPS_Z - CIG_IDLE_Z),
+        0,
+        1,
+      );
+      holdMeterRef.current?.style.setProperty("--hold-progress", String(holdProgress));
+
       const nearLips = cigGroup.position.z > CIG_LIPS_Z - 0.06;
       if (!atLips && holding && nearLips) {
         atLips = true;
+        dragReady = true;
         shakeT = 0.22;
         emberMat.emissiveIntensity = 5;
       }
-      if (atLips && !holding) {
-        atLips = false;
-        const ep = new THREE.Vector3();
-        ember.getWorldPosition(ep);
-        emitSmoke(ep.x, ep.y, ep.z, true);
 
-        // Count drag if close enough
-        if (cigGroup.position.z > CIG_LIPS_Z - 0.18) {
+      // Store the successful reach as soon as it occurs. This prevents a mobile
+      // touch release from missing the count while the cigarette begins retreating.
+      if (wasHolding && !holding) {
+        if (dragReady) {
+          const ep = new THREE.Vector3();
+          ember.getWorldPosition(ep);
+          emitSmoke(ep.x, ep.y, ep.z, true);
+
           setDrags((prev) => {
             const next = prev + 1;
             localStorage.setItem("cig-drags", String(next));
@@ -270,7 +283,11 @@ export default function CigaretteCanvas() {
           });
           setHintVisible(false);
         }
+
+        atLips = false;
+        dragReady = false;
       }
+      wasHolding = holding;
 
       if (!holding) {
         cigGroup.position.y = -0.32 + Math.sin(t * 0.72) * 0.022;
@@ -318,8 +335,22 @@ export default function CigaretteCanvas() {
     ro.observe(canvas);
 
     // ── Input ──────────────────────────────────────────────────────
-    const startHold = () => { holding = true; };
-    const endHold   = () => { holding = false; };
+    const startHold = (event?: MouseEvent | TouchEvent) => {
+      if (event) {
+        const point = "touches" in event ? event.touches[0] : event;
+        if (point) {
+          const bounds = canvas.getBoundingClientRect();
+          holdMeterRef.current?.style.setProperty("--hold-x", `${point.clientX - bounds.left}px`);
+          holdMeterRef.current?.style.setProperty("--hold-y", `${point.clientY - bounds.top}px`);
+        }
+      }
+      holding = true;
+      setHoldingUi(true);
+    };
+    const endHold = () => {
+      holding = false;
+      setHoldingUi(false);
+    };
 
     canvas.addEventListener("mousedown",   startHold);
     canvas.addEventListener("mouseup",     endHold);
@@ -374,6 +405,14 @@ export default function CigaretteCanvas() {
         aria-hidden="true"
       />
       <div className={`${styles.povBlink} ${blinkVisible ? styles.povBlinkOn : ""}`} aria-hidden="true" />
+
+      <div
+        ref={holdMeterRef}
+        className={`${styles.holdMeter} ${holdingUi ? styles.holdMeterOn : ""}`}
+        aria-hidden="true"
+      >
+        <span />
+      </div>
 
       <div className={styles.lightningStamp} aria-hidden="true">
         <svg viewBox="0 0 120 180" focusable="false">

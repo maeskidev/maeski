@@ -93,6 +93,75 @@
   }
 }
 
+/* ── Medidor de calada ─────────────────────── */
+.holdMeter {
+  --hold-progress: 0;
+  position: absolute;
+  top: var(--hold-y, 50%);
+  left: var(--hold-x, 50%);
+  z-index: 12;
+  display: grid;
+  width: 3rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid rgba(23, 17, 12, 0.72);
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from -90deg,
+      #ff5500 calc(var(--hold-progress) * 1turn),
+      rgba(27, 20, 15, 0.13) 0
+    );
+  box-shadow:
+    0.14rem 0.17rem 0 rgba(23, 17, 12, 0.62),
+    inset 0 0 0 0.18rem rgba(255, 249, 237, 0.82);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-12deg) scale(0.82);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+  pointer-events: none;
+}
+
+.holdMeter::before {
+  width: 2.08rem;
+  aspect-ratio: 1;
+  content: "";
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(
+      -25deg,
+      rgba(42, 27, 18, 0.07) 0 1px,
+      transparent 1px 4px
+    ),
+    rgba(255, 248, 232, 0.94);
+}
+
+.holdMeter span {
+  position: absolute;
+  width: 0.48rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(23, 17, 12, 0.65);
+  border-radius: 50%;
+  background: #ff5500;
+  box-shadow: 0 0 0.5rem rgba(255, 85, 0, 0.55);
+}
+
+.holdMeterOn {
+  opacity: 0.68;
+  transform: translate(-50%, -50%) rotate(-12deg) scale(1);
+}
+
+@media (max-width: 640px) {
+  .holdMeter {
+    width: 2.7rem;
+  }
+
+  .holdMeter::before {
+    width: 1.85rem;
+  }
+}
+
 /* ── Rayo fotocopiado ─────────────────────── */
 .lightningStamp {
   position: absolute;
