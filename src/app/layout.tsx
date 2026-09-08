@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MichaelQeuiros.com",
+  title: "Michael Esteban Quiros",
   description: "Landing, blog, and playground by Michael E. Quiros.",
 };
 
@@ -29,6 +29,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚬</text></svg>"
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QSQWTK8RFC"
           strategy="afterInteractive"

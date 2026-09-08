@@ -1,0 +1,598 @@
+.pageShell {
+  min-height: 100vh;
+  background: #fff;
+  color: #000;
+}
+
+.poster {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 3.438rem 2.063rem 1.688rem 2.063rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.identityBlock,
+.visualNav,
+.illustrationArea,
+.experienceBlock {
+  position: absolute;
+}
+
+.identityBlock {
+  left: 2.1825%;
+  top: 6.1176%;
+  width: 15.375rem;
+}
+
+.handle,
+.expTitle {
+  margin: 0;
+  font-family: "Comic Relief", "Comic Sans MS", cursive;
+  font-style: normal;
+  font-weight: 400;
+  color: #000;
+}
+
+.identityText p,
+.navItem,
+.expRow span {
+  font-family: "Coming Soon", "Trebuchet MS", cursive;
+  font-style: normal;
+  font-weight: 400;
+  color: #000;
+}
+
+.handle {
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.handleBorder,
+.expBorder {
+  display: block;
+  height: 0.875rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left center;
+}
+
+.handleBorder {
+  width: 7.625rem;
+  margin-top: 0.375rem;
+  margin-left: -0.125rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='14' viewBox='0 0 120 14' fill='none'%3E%3Cpath d='M1 8.26064C31.2462 7.40582 54.5057 7.66098 119 11.2606' stroke='black' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M1 5.76064C37.5 5.26064 77.5 6.26064 115.5 9.76064' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.identityText {
+  margin-top: 2.625rem;
+}
+
+.identityText p {
+  margin: 0;
+  font-size: 1.875rem;
+  line-height: 1.05;
+}
+
+.identityText p + p {
+  margin-top: 0.688rem;
+  font-size: 1.75rem;
+}
+
+.visualNav {
+  top: 6.8235%;
+  right: 2.578%;
+  display: grid;
+  justify-items: end;
+  gap: 1.5rem;
+}
+
+.navItem {
+  font-size: 1.75rem;
+  line-height: 1;
+  text-align: right;
+  text-decoration: none;
+}
+
+a.navItem {
+  transition: opacity 160ms ease;
+}
+
+a.navItem:hover,
+a.navItem:focus-visible {
+  opacity: 0.58;
+  outline: none;
+}
+
+.illustrationArea {
+  left: 39.3%;
+  top: 18.8%;
+  width: 39rem;
+  height: 38rem;
+}
+
+.smokeCluster {
+  position: absolute;
+  left: 5.4rem;
+  top: 0;
+  width: 15rem;
+  height: 18rem;
+}
+
+.smokePuff {
+  position: absolute;
+  border: 7px solid #000;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.92) 0%, rgba(208, 208, 208, 0.95) 58%, rgba(186, 186, 186, 0.98) 100%);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.smokePuff::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 999px;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.9) 1.2px, transparent 1.4px),
+    radial-gradient(rgba(120, 120, 120, 0.3) 1.2px, transparent 1.4px),
+    radial-gradient(rgba(180, 180, 180, 0.34) 1px, transparent 1.3px);
+  background-size: 14px 14px, 18px 18px, 12px 12px;
+  background-position: 0 0, 7px 6px, 2px 9px;
+  filter: blur(0.4px);
+}
+
+.smokePuffOne {
+  left: 3.2rem;
+  top: 2.8rem;
+  width: 8.6rem;
+  height: 13rem;
+  border-radius: 4.8rem;
+}
+
+.smokePuffTwo {
+  left: 1rem;
+  top: 8.8rem;
+  width: 7rem;
+  height: 7.6rem;
+}
+
+.smokePuffThree {
+  left: 7rem;
+  top: 0.4rem;
+  width: 3.1rem;
+  height: 3.1rem;
+}
+
+.smokePuffFour {
+  left: 11.8rem;
+  top: 3.9rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.cigaretteWrap {
+  position: absolute;
+  left: 9.2rem;
+  top: 13.8rem;
+  width: 21rem;
+  height: 8rem;
+  transform: rotate(25deg);
+  transform-origin: center;
+}
+
+.cigaretteBody,
+.cigaretteTip,
+.cigaretteBand,
+.cigaretteDots {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border: 6px solid #000;
+}
+
+.cigaretteBody {
+  left: 0;
+  width: 16rem;
+  border-right: 0;
+  border-radius: 1.9rem 0 0 1.9rem;
+  background:
+    radial-gradient(circle at 45% 50%, rgba(255, 242, 204, 0.4), transparent 60%),
+    linear-gradient(180deg, #fffef7 0%, #fdf8e8 100%);
+}
+
+.cigaretteBand {
+  left: 13.8rem;
+  width: 2rem;
+  border-right: 0;
+  border-left-width: 5px;
+  background: rgba(240, 210, 135, 0.3);
+}
+
+.cigaretteTip {
+  right: 0;
+  width: 5.2rem;
+  border-radius: 0 1.9rem 1.9rem 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), transparent 22%),
+    linear-gradient(180deg, #f5d39f 0%, #edc37f 100%);
+}
+
+.cigaretteDots {
+  inset: 0 0 0 auto;
+  width: 5.2rem;
+  border-color: transparent;
+  background-image:
+    radial-gradient(circle, transparent 0 7px, #000 7px 10px, transparent 10px),
+    radial-gradient(circle, transparent 0 7px, #000 7px 10px, transparent 10px),
+    radial-gradient(circle, transparent 0 7px, #000 7px 10px, transparent 10px),
+    radial-gradient(circle, transparent 0 7px, #000 7px 10px, transparent 10px),
+    radial-gradient(circle, transparent 0 7px, #000 7px 10px, transparent 10px);
+  background-size: 24px 24px;
+  background-position:
+    14px 11px,
+    43px 19px,
+    30px 44px,
+    58px 50px,
+    8px 56px;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+}
+
+.lighter {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 4.4rem;
+  height: 8.2rem;
+}
+
+.lighterTop,
+.lighterBody,
+.lighterInner,
+.flameOuter,
+.flameInner {
+  position: absolute;
+}
+
+.lighterTop {
+  left: 0.3rem;
+  top: 0;
+  width: 3.8rem;
+  height: 1.4rem;
+  border: 4px solid #000;
+  border-bottom-width: 3px;
+  border-radius: 0.5rem 0.5rem 0.35rem 0.35rem;
+  background:
+    radial-gradient(circle at 28% 35%, rgba(255, 255, 255, 0.48), transparent 18%),
+    linear-gradient(180deg, #ccc3b3 0%, #9b8f7d 100%);
+}
+
+.lighterBody {
+  left: 0;
+  top: 1rem;
+  width: 4.4rem;
+  height: 6.8rem;
+  border: 4px solid #000;
+  border-radius: 0.7rem 0.7rem 1rem 1rem;
+  background:
+    linear-gradient(180deg, #dad2f3 0%, #dce8ff 48%, #abc2e7 48%, #86a8df 100%);
+  overflow: hidden;
+}
+
+.lighterBody::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.58) 1px, transparent 1.2px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 40%);
+  background-size: 8px 8px, 100% 100%;
+  opacity: 0.5;
+}
+
+.lighterInner {
+  left: 2rem;
+  top: 1.9rem;
+  width: 0.35rem;
+  height: 4.9rem;
+  border-radius: 999px;
+  background: rgba(30, 30, 30, 0.62);
+}
+
+.flameOuter {
+  left: 1.25rem;
+  top: -1rem;
+  width: 1.4rem;
+  height: 2rem;
+  border: 3px solid #000;
+  border-radius: 1rem 1rem 0.7rem 0.7rem;
+  background: #ff4c00;
+  transform: rotate(8deg);
+}
+
+.flameInner {
+  left: 1.65rem;
+  top: -0.45rem;
+  width: 0.65rem;
+  height: 1rem;
+  border-radius: 0.6rem 0.6rem 0.4rem 0.4rem;
+  background: #ffd43d;
+  transform: rotate(8deg);
+}
+
+.panicBadge {
+  position: absolute;
+  right: -8.6rem;
+  bottom: -0.2rem;
+  width: 11rem;
+  height: 10rem;
+}
+
+.panicBurst {
+  position: absolute;
+  inset: 0;
+  background: #ffe100;
+  clip-path: polygon(
+    50% 0%,
+    58% 12%,
+    71% 3%,
+    73% 18%,
+    86% 10%,
+    82% 24%,
+    97% 23%,
+    88% 35%,
+    100% 42%,
+    88% 49%,
+    100% 61%,
+    84% 62%,
+    91% 76%,
+    77% 71%,
+    76% 87%,
+    63% 77%,
+    56% 100%,
+    45% 82%,
+    34% 98%,
+    31% 79%,
+    18% 90%,
+    19% 73%,
+    3% 79%,
+    13% 62%,
+    0% 56%,
+    14% 46%,
+    2% 34%,
+    16% 30%,
+    8% 16%,
+    23% 20%,
+    21% 4%,
+    36% 13%
+  );
+  border: 4px solid #000;
+}
+
+.panicRing {
+  position: absolute;
+  left: 1.45rem;
+  top: 2rem;
+  width: 6rem;
+  height: 3.7rem;
+  border: 4px solid #000;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 45%, #ff1b0a 0%, #ff0000 70%, #cf0000 100%);
+  box-shadow:
+    0 0 0 0.32rem #c8eff2,
+    0 0 0 0.66rem #7e9ba0;
+}
+
+.panicText {
+  position: absolute;
+  left: 2.2rem;
+  top: 2.82rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #000;
+}
+
+.experienceBlock {
+  left: 1.8519%;
+  bottom: 3.1765%;
+  width: 40.278%;
+}
+
+.expTitleWrap {
+  width: 5rem;
+}
+
+.expTitle {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.expBorder {
+  width: 5.625rem;
+  margin-top: 0.188rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='11' viewBox='0 0 88 11' fill='none'%3E%3Cpath d='M1 6.35212C27.9774 5.74978 47.8691 5.88735 87 9.35212' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M1 4.85212C28 4.35212 52 4.85212 79 7.85212' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.expTable {
+  margin-top: 1rem;
+  display: grid;
+  gap: 2.125rem;
+}
+
+.expRow {
+  display: grid;
+  grid-template-columns: 12rem 12rem 10rem;
+  align-items: center;
+}
+
+.expRow span {
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 1280px) {
+  .poster {
+    padding: 2rem 1.5rem;
+  }
+
+  .identityBlock {
+    left: 1.5rem;
+    top: 2rem;
+  }
+
+  .visualNav {
+    top: 2.2rem;
+    right: 1.5rem;
+  }
+
+  .illustrationArea {
+    left: 50%;
+    top: 16rem;
+    width: 31rem;
+    height: 30rem;
+    transform: translateX(-24%);
+  }
+
+  .smokeCluster {
+    transform: scale(0.82);
+    transform-origin: top left;
+  }
+
+  .cigaretteWrap {
+    left: 8rem;
+    top: 12rem;
+    transform: rotate(25deg) scale(0.82);
+    transform-origin: left top;
+  }
+
+  .lighter {
+    right: 2rem;
+    bottom: 0.5rem;
+    transform: scale(0.85);
+    transform-origin: bottom right;
+  }
+
+  .panicBadge {
+    right: -6rem;
+    bottom: 0;
+    transform: scale(0.85);
+    transform-origin: bottom right;
+  }
+
+  .experienceBlock {
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: auto;
+  }
+
+  .expRow {
+    grid-template-columns: 10rem 10rem 9rem;
+    gap: 2rem;
+  }
+
+  .expRow span {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .poster {
+    min-height: auto;
+    padding: 1.5rem 1rem 2rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .identityBlock,
+  .visualNav,
+  .illustrationArea,
+  .experienceBlock {
+    position: relative;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    transform: none;
+  }
+
+  .visualNav {
+    justify-items: start;
+    gap: 1rem;
+  }
+
+  .navItem {
+    text-align: left;
+  }
+
+  .identityText {
+    margin-top: 1.5rem;
+  }
+
+  .identityText p {
+    font-size: 1.55rem;
+  }
+
+  .identityText p + p {
+    font-size: 1.45rem;
+  }
+
+  .illustrationArea {
+    width: 100%;
+    max-width: 28rem;
+    height: 24rem;
+    margin: 1rem auto 0;
+  }
+
+  .smokeCluster {
+    left: 2.5rem;
+    transform: scale(0.66);
+    transform-origin: top left;
+  }
+
+  .cigaretteWrap {
+    left: 5.4rem;
+    top: 10.4rem;
+    transform: rotate(25deg) scale(0.66);
+    transform-origin: left top;
+  }
+
+  .lighter {
+    right: 3.2rem;
+    bottom: 0;
+    transform: scale(0.75);
+    transform-origin: bottom right;
+  }
+
+  .panicBadge {
+    right: -0.7rem;
+    bottom: 0;
+    transform: scale(0.72);
+    transform-origin: bottom right;
+  }
+
+  .experienceBlock {
+    margin-top: 0.5rem;
+  }
+
+  .expRow {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .expTable {
+    gap: 1.2rem;
+  }
+
+  .expRow span {
+    font-size: 1rem;
+  }
+}

@@ -10,15 +10,19 @@
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.72",
+    "@types/three": "^0.185.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^13.2.0",
     "gray-matter": "^4.0.3",
+    "lenis": "^1.3.26",
     "motion": "^12.38.0",
     "next": "16.2.1",
     "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
