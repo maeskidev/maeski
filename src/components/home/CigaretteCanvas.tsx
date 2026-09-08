@@ -25,7 +25,11 @@ export default function CigaretteCanvas() {
   const [toast, setToast] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [hintVisible, setHintVisible] = useState(true);
+  const [smokeBurstVisible, setSmokeBurstVisible] = useState(false);
+  const [blinkVisible, setBlinkVisible] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const smokeBurstTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const blinkTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const MSGS = [
     "Necesitabas eso.",
@@ -245,6 +249,18 @@ export default function CigaretteCanvas() {
             const next = prev + 1;
             localStorage.setItem("cig-drags", String(next));
             showToast(MSGS[(next - 1) % MSGS.length]);
+
+            if (smokeBurstTimer.current) clearTimeout(smokeBurstTimer.current);
+            setSmokeBurstVisible(false);
+            requestAnimationFrame(() => setSmokeBurstVisible(true));
+            smokeBurstTimer.current = setTimeout(() => setSmokeBurstVisible(false), 1350);
+
+            if (next % 3 === 0) {
+              if (blinkTimer.current) clearTimeout(blinkTimer.current);
+              setBlinkVisible(true);
+              blinkTimer.current = setTimeout(() => setBlinkVisible(false), 260);
+            }
+
             return next;
           });
           setToday((prev) => {
@@ -337,6 +353,9 @@ export default function CigaretteCanvas() {
       canvas.removeEventListener("touchcancel", endHold);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup",   onKeyUp);
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+      if (smokeBurstTimer.current) clearTimeout(smokeBurstTimer.current);
+      if (blinkTimer.current) clearTimeout(blinkTimer.current);
       ren.dispose();
     };
   }, []);
@@ -349,6 +368,41 @@ export default function CigaretteCanvas() {
         aria-label="Cigarrillo 3D — mantén presionado para fumar"
         role="application"
       />
+
+      <div
+        className={`${styles.smokeBurst} ${smokeBurstVisible ? styles.smokeBurstOn : ""}`}
+        aria-hidden="true"
+      />
+      <div className={`${styles.povBlink} ${blinkVisible ? styles.povBlinkOn : ""}`} aria-hidden="true" />
+
+      <div className={styles.lightningStamp} aria-hidden="true">
+        <svg viewBox="0 0 120 180" focusable="false">
+          <path d="M71 3 17 92h35l-9 82 61-101H68z" />
+          <path className={styles.lightningScratch} d="m62 13-34 70h35l-6 55 36-65H58z" />
+        </svg>
+      </div>
+
+      <aside className={styles.grungeStamp} aria-label="Fumar mata, pero qué diseño">
+        <span>FUMAR MATA</span>
+        <small>PERO QUÉ DISEÑO</small>
+        <b>×</b>
+      </aside>
+
+      <div className={styles.momStamp} aria-label="Corazón de tatuaje con la palabra mamá">
+        <svg viewBox="0 0 220 190" focusable="false">
+          <path
+            className={styles.momHeart}
+            d="M110 174C94 159 31 114 31 64c0-24 17-42 39-42 18 0 32 10 40 24 8-14 22-24 40-24 22 0 39 18 39 42 0 50-63 95-79 110Z"
+          />
+          <path
+            className={styles.momRibbon}
+            d="M9 78 49 65h122l40 13-30 19 20 25-53-13H72l-53 13 20-25Z"
+          />
+          <path className={styles.momRibbonFold} d="m49 65 23 44-53 13 20-25L9 78Z" />
+          <path className={styles.momRibbonFold} d="m171 65-23 44 53 13-20-25 30-19Z" />
+          <text x="110" y="98" textAnchor="middle">MAMÁ</text>
+        </svg>
+      </div>
 
       {/* Hint */}
       <p className={`${styles.hint} ${hintVisible ? "" : styles.hintOff}`}>

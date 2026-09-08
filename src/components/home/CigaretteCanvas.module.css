@@ -14,12 +14,333 @@
   user-select: none;
 }
 
+/* ── Efectos de interacción ────────────────── */
+.smokeBurst,
+.povBlink {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.smokeBurst {
+  z-index: 5;
+  overflow: hidden;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 34% 42% at 22% 76%, rgba(18, 14, 12, 0.93) 0%, rgba(28, 23, 20, 0.68) 42%, transparent 76%),
+    radial-gradient(ellipse 48% 36% at 76% 56%, rgba(20, 16, 14, 0.88) 0%, rgba(37, 30, 26, 0.58) 50%, transparent 78%),
+    radial-gradient(ellipse 38% 52% at 49% 22%, rgba(25, 20, 18, 0.82) 0%, rgba(47, 39, 34, 0.47) 53%, transparent 80%);
+  filter: blur(14px) contrast(1.18);
+  transform: scale(0.55);
+  transform-origin: 50% 68%;
+}
+
+.smokeBurstOn {
+  animation: smoke-burst 1.35s ease-out forwards;
+}
+
+.povBlink {
+  z-index: 30;
+  opacity: 0;
+  background:
+    linear-gradient(to bottom, rgba(21, 14, 10, 0.96) 0 50%, transparent 50% 100%),
+    linear-gradient(to top, rgba(21, 14, 10, 0.96) 0 50%, transparent 50% 100%);
+  background-size: 100% 0%, 100% 0%;
+  background-position: top, bottom;
+  background-repeat: no-repeat;
+}
+
+.povBlinkOn {
+  animation: pov-blink 260ms ease-in-out forwards;
+}
+
+@keyframes smoke-burst {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  16% {
+    opacity: 0.96;
+  }
+
+  70% {
+    opacity: 0.52;
+    transform: scale(1.25);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes pov-blink {
+  0%,
+  100% {
+    opacity: 0;
+    background-size: 100% 0%, 100% 0%;
+  }
+
+  42% {
+    opacity: 1;
+    background-size: 100% 52%, 100% 52%;
+  }
+
+  58% {
+    opacity: 1;
+    background-size: 100% 52%, 100% 52%;
+  }
+}
+
+/* ── Rayo fotocopiado ─────────────────────── */
+.lightningStamp {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  z-index: 6;
+  width: clamp(5.5rem, 10vw, 8.5rem);
+  aspect-ratio: 2 / 3;
+  opacity: 0.72;
+  transform: translateY(-50%) rotate(-24deg);
+  animation: lightning-drift 9s ease-in-out infinite;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.lightningStamp svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lightningStamp path:first-child {
+  fill: rgba(24, 18, 14, 0.79);
+  stroke: rgba(24, 18, 14, 0.93);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+
+.lightningScratch {
+  fill: none;
+  stroke: rgba(255, 252, 244, 0.55);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 13 6 4 5;
+}
+
+.lightningStamp::before,
+.lightningStamp::after {
+  position: absolute;
+  content: "";
+  inset: 4% 8%;
+  background:
+    repeating-linear-gradient(
+      17deg,
+      transparent 0 7px,
+      rgba(255, 255, 255, 0.42) 7px 8px,
+      transparent 8px 15px
+    );
+  clip-path: polygon(59% 0, 8% 50%, 39% 50%, 26% 100%, 94% 42%, 62% 42%);
+  mix-blend-mode: screen;
+  opacity: 0.62;
+}
+
+.lightningStamp::after {
+  inset: -5%;
+  border: 2px dashed rgba(35, 25, 19, 0.32);
+  clip-path: polygon(59% 0, 8% 50%, 39% 50%, 26% 100%, 94% 42%, 62% 42%);
+  background: none;
+  transform: translate(0.22rem, -0.16rem);
+}
+
+/* ── Sello grunge ─────────────────────────── */
+.grungeStamp {
+  position: absolute;
+  top: 6.5rem;
+  right: clamp(-4.1rem, -4vw, -1.8rem);
+  z-index: 6;
+  display: grid;
+  width: 8.7rem;
+  min-height: 7.8rem;
+  padding: 0.75rem;
+  place-content: center;
+  overflow: hidden;
+  border: 3px double rgba(29, 22, 16, 0.68);
+  border-radius: 47% 53% 44% 56% / 55% 44% 56% 45%;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 4px, rgba(36, 25, 17, 0.08) 4px 5px),
+    rgba(255, 248, 232, 0.28);
+  color: rgba(29, 22, 16, 0.72);
+  font-family: "Comic Relief", "Comic Sans MS", cursive;
+  line-height: 0.9;
+  text-align: center;
+  transform: rotate(11deg);
+  animation: stamp-drift 11s ease-in-out infinite;
+  opacity: 0.68;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.grungeStamp::before,
+.grungeStamp::after {
+  position: absolute;
+  content: "";
+  width: 137%;
+  height: 3px;
+  background: rgba(29, 22, 16, 0.62);
+  transform: rotate(-42deg);
+}
+
+.grungeStamp::before {
+  top: 44%;
+  left: -18%;
+}
+
+.grungeStamp::after {
+  top: 52%;
+  left: -18%;
+}
+
+.grungeStamp span {
+  font-size: 1.28rem;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+}
+
+.grungeStamp small {
+  margin-top: 0.42rem;
+  font-family: "Coming Soon", cursive;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.grungeStamp b {
+  position: absolute;
+  right: 0.48rem;
+  bottom: 0.22rem;
+  font-family: Arial, sans-serif;
+  font-size: 2.7rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* ── Tatuaje MAMÁ ─────────────────────────── */
+.momStamp {
+  position: absolute;
+  right: -35px;
+  bottom: 6.1rem;
+  z-index: 7;
+  width: clamp(7.6rem, 13vw, 10.7rem);
+  aspect-ratio: 220 / 190;
+  opacity: 0.66;
+  transform: rotate(7deg);
+  animation: mom-drift 10s ease-in-out infinite;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.momStamp svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: contrast(1.14);
+}
+
+.momHeart,
+.momRibbon,
+.momRibbonFold {
+  stroke: rgba(34, 24, 18, 0.86);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.momHeart {
+  fill: rgba(255, 234, 224, 0.42);
+}
+
+.momRibbon {
+  fill: rgba(244, 226, 205, 0.62);
+}
+
+.momRibbonFold {
+  fill: rgba(113, 81, 62, 0.2);
+}
+
+.momStamp text {
+  fill: rgba(28, 20, 16, 0.85);
+  font-family: "Comic Relief", "Comic Sans MS", cursive;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  paint-order: stroke fill;
+  stroke: rgba(255, 250, 239, 0.35);
+  stroke-width: 1px;
+}
+
+.momStamp::after {
+  position: absolute;
+  inset: 9% 8%;
+  content: "";
+  background: repeating-linear-gradient(
+    -13deg,
+    transparent 0 7px,
+    rgba(255, 255, 255, 0.26) 7px 8px,
+    transparent 8px 14px
+  );
+  clip-path: path("M110 174C94 159 31 114 31 64c0-24 17-42 39-42 18 0 32 10 40 24 8-14 22-24 40-24 22 0 39 18 39 42 0 50-63 95-79 110Z");
+  opacity: 0.55;
+}
+
+@keyframes lightning-drift {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(-24deg);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translate(-3px, calc(-50% - 5px)) rotate(-21deg);
+    opacity: 0.65;
+  }
+}
+
+@keyframes stamp-drift {
+  0%,
+  100% {
+    transform: rotate(11deg);
+    opacity: 0.68;
+  }
+
+  50% {
+    transform: translate(-2px, -4px) rotate(8deg);
+    opacity: 0.61;
+  }
+}
+
+@keyframes mom-drift {
+  0%,
+  100% {
+    transform: rotate(7deg);
+    opacity: 0.66;
+  }
+
+  50% {
+    transform: translate(3px, -5px) rotate(4deg);
+    opacity: 0.59;
+  }
+}
+
 /* ── Hint ─────────────────────────────────── */
 .hint {
   position: absolute;
-  bottom: 90px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background: rgba(20, 16, 10, 0.05);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -39,7 +360,7 @@
 
 .hintOff {
   opacity: 0;
-  transform: translateX(-50%) translateY(6px);
+  transform: translate(-50%, calc(-50% + 6px));
 }
 
 /* ── Stats ────────────────────────────────── */
@@ -59,9 +380,9 @@
 }
 
 .stat {
-  padding: 11px 20px;
+  padding: 8px 14px;
   text-align: center;
-  min-width: 72px;
+  min-width: 58px;
 }
 
 .stat + .stat {
@@ -70,7 +391,7 @@
 
 .statLbl {
   display: block;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -80,7 +401,7 @@
 
 .statVal {
   display: block;
-  font-size: 28px;
+  font-size: 21px;
   font-weight: 800;
   font-family: "Comic Relief", cursive;
   color: #1a1410;
@@ -92,31 +413,81 @@
   color: #ff5500;
 }
 
-/* ── Toast ────────────────────────────────── */
+/* ── Mensaje de plón ──────────────────────── */
 .toast {
   position: absolute;
-  top: 18px;
+  top: 50%;
   left: 50%;
   z-index: 20;
-  transform: translateX(-50%) translateY(-8px);
-  background: rgba(20, 16, 10, 0.07);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(20, 16, 10, 0.12);
-  color: rgba(20, 16, 10, 0.75);
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: "Coming Soon", cursive;
-  letter-spacing: 0.03em;
+  max-width: min(78vw, 32rem);
+  padding: 0.7rem 1.35rem 0.8rem;
+  overflow: hidden;
+  transform: translate(-50%, calc(-50% - 0.8rem)) rotate(-2deg) scale(0.82);
+  border: 3px solid #17110c;
+  border-radius: 0.3rem 0.7rem 0.4rem 0.65rem;
+  background:
+    radial-gradient(circle at 12% 22%, rgba(255, 255, 255, 0.68) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 83% 72%, rgba(60, 36, 21, 0.2) 0 1px, transparent 1.8px),
+    repeating-linear-gradient(-16deg, rgba(48, 28, 13, 0.07) 0 1px, transparent 1px 5px),
+    #ffd849;
+  box-shadow:
+    0.28rem 0.32rem 0 #17110c,
+    0.5rem 0.55rem 0 rgba(23, 17, 12, 0.2);
+  color: #17110c;
+  font-family: "Comic Relief", "Comic Sans MS", cursive;
+  font-size: clamp(1.35rem, 3vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.025em;
+  text-align: center;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.22s, transform 0.22s;
-  white-space: nowrap;
+  transition:
+    opacity 0.18s ease,
+    transform 0.25s cubic-bezier(0.18, 1.45, 0.48, 1);
 }
 
 .toastOn {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  opacity: 0.92;
+  transform: translate(-50%, -50%) rotate(-2deg) scale(1);
+}
+
+@media (max-width: 640px) {
+  .lightningStamp {
+    left: -10px;
+    width: 5rem;
+    opacity: 0.6;
+  }
+
+  .grungeStamp {
+    top: 4.5rem;
+    right: -3.2rem;
+    width: 6.8rem;
+    min-height: 6.1rem;
+    padding: 0.55rem;
+  }
+
+  .grungeStamp span {
+    font-size: 1rem;
+  }
+
+  .grungeStamp b {
+    font-size: 2.1rem;
+  }
+
+  .momStamp {
+    right: -35px;
+    bottom: 5.35rem;
+    width: 7.1rem;
+    opacity: 0.58;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightningStamp,
+  .grungeStamp,
+  .momStamp {
+    animation: none;
+  }
 }
