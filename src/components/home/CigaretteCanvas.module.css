@@ -513,8 +513,8 @@
   pointer-events: none;
   opacity: 0;
   transition:
-    opacity 0.18s ease,
-    transform 0.25s cubic-bezier(0.18, 1.45, 0.48, 1);
+    opacity 0.18s ease-in,
+    transform 0.25s ease-in;
 }
 
 .toastOn {

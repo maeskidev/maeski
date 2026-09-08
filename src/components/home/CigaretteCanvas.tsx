@@ -45,7 +45,7 @@ export default function CigaretteCanvas() {
     setToast(msg);
     setToastVisible(true);
     if (toastTimer.current) clearTimeout(toastTimer.current);
-    toastTimer.current = setTimeout(() => setToastVisible(false), 2800);
+    toastTimer.current = setTimeout(() => setToastVisible(false), 1000);
   }
 
   useEffect(() => {

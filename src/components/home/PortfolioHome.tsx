@@ -15,6 +15,7 @@ type PortfolioHomeProps = {
 
 export default function PortfolioHome(_: PortfolioHomeProps) {
   const [expOpen, setExpOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <main className={styles.layout}>
@@ -44,9 +45,31 @@ export default function PortfolioHome(_: PortfolioHomeProps) {
 
       {/* ── Col 3 · Row 1 — Navegación ── */}
       <nav className={styles.navigation} aria-label="Navegación principal">
-        <span className={styles.navItem}>WORK</span>
-        <Link href="/blog" className={styles.navItem}>READ.ME</Link>
-        <span className={styles.navItem}>2D</span>
+        <button
+          type="button"
+          className={styles.menuButton}
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="main-menu"
+          aria-label={menuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+        >
+          <span className={styles.menuIcon} aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+        </button>
+
+        <div
+          id="main-menu"
+          className={`${styles.menuPanel} ${menuOpen ? styles.menuPanelOpen : ""}`}
+        >
+          <span className={styles.navItem}>WORK</span>
+          <Link href="/blog" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+            READ.ME
+          </Link>
+          <span className={styles.navItem}>2D</span>
+        </div>
       </nav>
 
       {/* ── Col 1 · Row 3 — Experiencia ── */}
