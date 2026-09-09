@@ -43,7 +43,9 @@ export default function PortfolioHome(_: PortfolioHomeProps) {
 
       {/* ── Col 1 · Row 1 — Brand ── */}
       <header className={styles.brand}>
-        <a href="#" className={styles.handleLink}>@maeskrr</a>
+        <a href="https://www.instagram.com/maeskrr/" className={styles.handleLink}>
+          @maeskrr
+        </a>
         <Image
           src="/borde1.png"
           alt=""
