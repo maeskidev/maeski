@@ -19,6 +19,7 @@ interface SmkParticle {
 }
 
 export default function CigaretteCanvas() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [drags, setDrags] = useState(0);
   const [today, setToday] = useState(0);
@@ -35,10 +36,13 @@ export default function CigaretteCanvas() {
 
   const MSGS = [
     "Necesitabas eso.",
-    "Una más y das.",
+    "El ultimo de hoy",
     "El filtro ya quema.",
     "Tres en fila.",
-    "La brasa no miente.",
+    "ultimo plon.",
+    "Una más.",
+    "desayuno de campeones.",
+    "Mañana lo dejas.",
   ];
 
   function showToast(msg: string) {
@@ -340,8 +344,8 @@ export default function CigaretteCanvas() {
         const point = "touches" in event ? event.touches[0] : event;
         if (point) {
           const bounds = canvas.getBoundingClientRect();
-          holdMeterRef.current?.style.setProperty("--hold-x", `${point.clientX - bounds.left}px`);
-          holdMeterRef.current?.style.setProperty("--hold-y", `${point.clientY - bounds.top}px`);
+          wrapperRef.current?.style.setProperty("--hold-x", `${point.clientX - bounds.left}px`);
+          wrapperRef.current?.style.setProperty("--hold-y", `${point.clientY - bounds.top}px`);
         }
       }
       holding = true;
@@ -392,7 +396,7 @@ export default function CigaretteCanvas() {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div ref={wrapperRef} className={styles.wrapper}>
       <canvas
         ref={canvasRef}
         className={styles.canvas}

@@ -485,8 +485,8 @@
 /* ── Mensaje de plón ──────────────────────── */
 .toast {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: var(--hold-y, 50%);
+  left: var(--hold-x, 50%);
   z-index: 20;
   max-width: min(78vw, 32rem);
   padding: 0.7rem 1.35rem 0.8rem;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { BlogPostMeta } from "@/lib/blog";
 
@@ -16,6 +16,27 @@ type PortfolioHomeProps = {
 export default function PortfolioHome(_: PortfolioHomeProps) {
   const [expOpen, setExpOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const spotlightInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.code === "Space") {
+        event.preventDefault();
+        setMenuOpen(true);
+      }
+
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (menuOpen) spotlightInputRef.current?.focus();
+  }, [menuOpen]);
 
   return (
     <main className={styles.layout}>
@@ -43,34 +64,54 @@ export default function PortfolioHome(_: PortfolioHomeProps) {
         <CigaretteCanvas />
       </div>
 
-      {/* ── Col 3 · Row 1 — Navegación ── */}
-      <nav className={styles.navigation} aria-label="Navegación principal">
-        <button
-          type="button"
-          className={styles.menuButton}
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-expanded={menuOpen}
-          aria-controls="main-menu"
-          aria-label={menuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
-        >
-          <span className={styles.menuIcon} aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
-        </button>
-
-        <div
-          id="main-menu"
-          className={`${styles.menuPanel} ${menuOpen ? styles.menuPanelOpen : ""}`}
-        >
-          <span className={styles.navItem}>WORK</span>
-          <Link href="/blog" className={styles.navItem} onClick={() => setMenuOpen(false)}>
-            READ.ME
-          </Link>
-          <span className={styles.navItem}>2D</span>
-        </div>
+      {/* Navegación constante en la misma posición que el blog */}
+      <nav className={styles.primaryNavigation} aria-label="Navegación principal">
+        <Link href="/" className={styles.primaryNavigationItemActive} aria-current="page">
+          home
+        </Link>
+        <Link href="/blog" className={styles.primaryNavigationItem}>
+          readme.md
+        </Link>
       </nav>
+
+      {/* Spotlight de navegación rápida */}
+      <button
+        type="button"
+        className={styles.menuButton}
+        onClick={() => setMenuOpen(true)}
+        aria-expanded={menuOpen}
+        aria-controls="main-menu"
+        aria-label="Abrir búsqueda de navegación"
+      >
+        <img src="/menu-icon.png" alt="" aria-hidden="true" />
+      </button>
+
+      {menuOpen && (
+        <div className={styles.spotlightOverlay} onClick={() => setMenuOpen(false)}>
+          <section
+            id="main-menu"
+            className={styles.menuPanel}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navegación rápida"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <label className={styles.spotlightSearch}>
+              <span aria-hidden="true">⌕</span>
+              <input ref={spotlightInputRef} type="search" placeholder="Buscar" aria-label="Buscar en navegación" />
+              <kbd>esc</kbd>
+            </label>
+            <a href="#work" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+              <span>Work</span>
+              <span>↵</span>
+            </a>
+            <a href="#2d" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+              <span>2D</span>
+              <span>↵</span>
+            </a>
+          </section>
+        </div>
+      )}
 
       {/* ── Col 1 · Row 3 — Experiencia ── */}
       <section className={styles.experience} aria-label="Experiencia">

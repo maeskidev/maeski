@@ -41,17 +41,47 @@
 }
 
 /* ─────────────────────────────────────────────
-   Navegación — col 3 / row 1, sobre el canvas
+   Navegación global — misma posición que README.MD
 ───────────────────────────────────────────── */
-.navigation {
-  grid-column: 3;
-  grid-row: 1;
+.primaryNavigation {
+  position: fixed;
+  top: clamp(1rem, 2.5vw, 1.5rem);
+  left: 50%;
   z-index: 10;
-  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 32px 40px 32px 24px;
+  gap: 1.1rem;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.primaryNavigationItem,
+.primaryNavigationItemActive {
+  color: #000;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: opacity 160ms ease;
+}
+
+.primaryNavigationItem {
+  opacity: 0.55;
+}
+
+.primaryNavigationItem:hover,
+.primaryNavigationItem:focus-visible {
+  opacity: 0.85;
+  outline: none;
+}
+
+.primaryNavigationItemActive {
+  opacity: 1;
+}
+
+.primaryNavigationItemActive:focus-visible {
+  outline: 1px solid rgba(0, 0, 0, 0.7);
+  outline-offset: 0.3rem;
 }
 
 /* ─────────────────────────────────────────────
@@ -116,109 +146,118 @@
 }
 
 .menuButton {
-  display: inline-flex;
-  width: 3.2rem;
-  height: 3rem;
-  align-items: center;
-  justify-content: center;
-  padding: 0.78rem;
-  border: 2px solid #000;
-  border-radius: 0.82rem;
-  background: #d9e53d;
-  box-shadow: -0.3rem 0.38rem 0 #000;
+  position: fixed;
+  top: clamp(1rem, 2.5vw, 1.5rem);
+  right: clamp(1rem, 2.5vw, 1.5rem);
+  z-index: 10;
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  place-content: center;
+  border: 0;
+  background: transparent;
   color: #000;
   cursor: pointer;
-  font-family: "Coming Soon", cursive;
-  font-size: clamp(0.8rem, 1.05vw, 1rem);
-  font-weight: 700;
-  line-height: 1;
-  transition:
-    transform 130ms ease,
-    box-shadow 130ms ease,
-    background 130ms ease;
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.menuButton:hover {
-  background: #e6f151;
-}
-
-.menuButton:active {
-  box-shadow: -0.08rem 0.12rem 0 #000;
-  transform: translate(-0.2rem, 0.25rem);
-}
-
-.menuButton:focus-visible {
-  outline: 2px dashed #000;
-  outline-offset: 4px;
-}
-
-.menuIcon {
-  display: grid;
-  width: 1.05rem;
-  gap: 0.17rem;
-}
-
-.menuIcon i {
+.menuButton img {
   display: block;
-  height: 0.12rem;
-  border-radius: 99px;
-  background: #000;
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.menuButton:hover,
+.menuButton:focus-visible {
+  opacity: 0.62;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.spotlightOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  padding: clamp(1rem, 8vh, 5rem) 1rem;
+  place-items: start center;
+  background: rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(8px);
 }
 
 .menuPanel {
-  display: grid;
-  width: 7.5rem;
-  max-height: 0;
-  margin-top: 0.8rem;
-  gap: 0.35rem;
-  padding: 0;
+  width: min(34rem, 100%);
   overflow: hidden;
-  border: 0 solid #000;
-  border-radius: 0.7rem;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: none;
-  opacity: 0;
-  transform: translateY(-0.45rem);
-  transition:
-    max-height 220ms ease-in,
-    padding 220ms ease-in,
-    border-width 220ms ease-in,
-    opacity 160ms ease-in,
-    transform 220ms ease-in;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 0.85rem;
+  background: rgba(250, 250, 252, 0.94);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(28px);
 }
 
-.menuPanelOpen {
-  max-height: 12rem;
-  padding: 0.65rem;
-  border-width: 2px;
-  box-shadow: -0.22rem 0.28rem 0 #000;
-  opacity: 1;
-  transform: translateY(0);
+.spotlightSearch,
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spotlightSearch {
+  gap: 0.7rem;
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 0.92rem;
+}
+
+.spotlightSearch span:first-child {
+  color: #000;
+  font-size: 1.3rem;
+}
+
+.spotlightSearch input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #000;
+  font: inherit;
+}
+
+.spotlightSearch input::placeholder {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.spotlightSearch kbd {
+  padding: 0.15rem 0.35rem;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 0.28rem;
+  color: rgba(0, 0, 0, 0.5);
+  font: inherit;
+  font-size: 0.7rem;
 }
 
 .navItem {
-  display: block;
-  padding: 0.4rem 0.5rem;
-  border-radius: 0.35rem;
-  color: #000;
-  font-family: "Coming Soon", cursive;
-  font-size: clamp(0.75rem, 1vw, 0.92rem);
-  font-weight: 700;
-  line-height: 1.1;
-  text-align: right;
+  padding: 0.85rem 1rem;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 0.92rem;
+  font-weight: 550;
   text-decoration: none;
-  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
-a.navItem {
-  transition: background 140ms ease, transform 140ms ease;
+.navItem span:last-child {
+  color: rgba(0, 0, 0, 0.4);
 }
 
-a.navItem:hover,
-a.navItem:focus-visible {
-  background: #d9e53d;
+.navItem:hover,
+.navItem:focus-visible {
+  background: rgba(0, 0, 0, 0.07);
+  color: #000;
   outline: none;
-  transform: translateX(-0.18rem);
 }
 
 /* ─────────────────────────────────────────────
@@ -331,22 +370,15 @@ a.navItem:focus-visible {
     z-index: 1;
   }
 
-  .navigation {
-    grid-column: 2;
-    grid-row: 1;
-    align-items: flex-end;
-    padding: 18px 18px 12px 10px;
-    z-index: 10;
+  .primaryNavigation {
+    gap: 0.85rem;
   }
 
   .menuButton {
-    width: 2.8rem;
-    height: 2.65rem;
-    padding: 0.66rem;
-  }
-
-  .menuPanel {
-    width: 6.55rem;
+    top: 0.9rem;
+    right: 0.9rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 
   .experience {

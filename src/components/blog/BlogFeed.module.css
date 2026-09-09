@@ -1,0 +1,378 @@
+.feedShell {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(52, 211, 153, 0.16), transparent 28rem),
+    radial-gradient(circle at 8% 92%, rgba(45, 212, 191, 0.1), transparent 26rem),
+    #0a0a0a;
+  color: #f5f5f5;
+}
+
+.primaryNavigation {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 1.5rem);
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.primaryNavigationItem,
+.primaryNavigationItemActive {
+  color: #ffffff;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: opacity 160ms ease;
+}
+
+.primaryNavigationItem {
+  opacity: 0.58;
+}
+
+.primaryNavigationItem:hover,
+.primaryNavigationItem:focus-visible {
+  opacity: 0.86;
+  outline: none;
+}
+
+.primaryNavigationItemActive {
+  opacity: 1;
+}
+
+.primaryNavigationItemActive:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 0.3rem;
+}
+
+.spotlightTrigger {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 1.5rem);
+  right: clamp(1rem, 2.5vw, 1.5rem);
+  z-index: 10;
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  gap: 0.28rem;
+  place-content: center;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.spotlightTrigger span {
+  display: block;
+  width: 1.15rem;
+  height: 1px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.spotlightTrigger img {
+  display: block;
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+.spotlightTrigger:hover,
+.spotlightTrigger:focus-visible {
+  opacity: 0.7;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.spotlightOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  padding: clamp(1rem, 8vh, 5rem) 1rem;
+  place-items: start center;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.spotlightPanel {
+  width: min(34rem, 100%);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.85rem;
+  background: rgba(35, 35, 37, 0.92);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(28px);
+}
+
+.spotlightSearch,
+.spotlightPanel a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.spotlightSearch {
+  gap: 0.7rem;
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.92rem;
+}
+
+.spotlightSearch span:first-child {
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.spotlightSearch input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+}
+
+.spotlightSearch input::placeholder {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.spotlightSearch kbd {
+  padding: 0.15rem 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.28rem;
+  color: rgba(255, 255, 255, 0.52);
+  font: inherit;
+  font-size: 0.7rem;
+}
+
+.spotlightPanel a {
+  padding: 0.85rem 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.92rem;
+  font-weight: 550;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.spotlightPanel a span:last-child {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.spotlightPanel a:hover,
+.spotlightPanel a:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  outline: none;
+}
+
+.feed {
+  height: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-y: contain;
+}
+
+.feed::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  position: relative;
+  display: flex;
+  min-height: 100%;
+  align-items: stretch;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  isolation: isolate;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.slide::before {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  content: "";
+  background: radial-gradient(circle at 50% 30%, rgba(110, 231, 183, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.slideContent {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+  opacity: 0.35;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 400ms ease,
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slideActive .slideContent {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slideText {
+  max-width: 42rem;
+  margin: 0;
+  align-self: center;
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.slideFooter {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.slideTitleBlock {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.slideAttribution {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.slideTitle {
+  margin: 0;
+  color: #f5f5f5;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+.likeButton {
+  display: grid;
+  width: 2.25rem;
+  aspect-ratio: 1;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(23, 23, 23, 0.55);
+  color: #f5f5f5;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.likeButton:hover,
+.likeButton:focus-visible {
+  border-color: rgba(110, 231, 183, 0.55);
+  background: rgba(110, 231, 183, 0.1);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.heart {
+  color: rgba(245, 245, 245, 0.85);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.readLink {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: transparent;
+  text-decoration: none;
+}
+
+.readLink:focus-visible {
+  inset: auto auto auto 1.25rem;
+  top: 1.25rem;
+  z-index: 3;
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(110, 231, 183, 0.5);
+  border-radius: 999px;
+  outline: none;
+  background: rgba(23, 23, 23, 0.65);
+  color: #a7f3d0;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+}
+
+.empty {
+  display: grid;
+  min-height: 100dvh;
+  padding: 2rem;
+  place-content: center;
+  gap: 1rem;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  text-align: center;
+}
+
+.homeLink {
+  color: #a7f3d0;
+}
+
+@media (max-width: 640px) {
+  .primaryNavigation {
+    gap: 0.85rem;
+  }
+
+  .spotlightTrigger {
+    top: 0.9rem;
+    right: 0.9rem;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .slide {
+    align-items: flex-start;
+    padding: 10dvh 1.35rem 6rem;
+  }
+
+  .slideText {
+    max-width: 22rem;
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  .readLink:focus-visible {
+    top: 1rem;
+    left: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed {
+    scroll-behavior: auto;
+  }
+
+  .slideContent,
+  .likeButton {
+    transition: none;
+  }
+}
